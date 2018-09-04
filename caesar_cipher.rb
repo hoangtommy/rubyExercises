@@ -11,11 +11,17 @@ PseudoCode:
 	return the encoded string, leaving punctuation and format the same
 =end
 
-def parse_code(charCode) #help method to deal with numbers larger than 26 (double looping of alphabet)
-	until charCode.between?(65, 90) || charCode.between?(97,122)
-		charCode -= 26
+def parse_code(charCode, newChar) #help method to deal with numbers larger than 26 (double looping of alphabet)
+	if charCode.between?(65, 90)
+		until newChar.between?(65, 90) 
+			newChar -= 26
+		end
+	elsif charCode.between?(97, 122)
+		until newChar.between?(97, 122)
+			newChar -= 26
+		end
 	end
-	return charCode
+	return newChar
 end
 
 def caesar_cipher(string, number)
@@ -23,25 +29,25 @@ def caesar_cipher(string, number)
 	stringArray = string.split("")
 	i = 0
 	while i < string.length
-		charIndex = stringArray[i].ord
-		newChar = charIndex + number #the new, shifted, character
-		if charIndex.between?(65,90) #for uppercase
+		charCode = stringArray[i].ord
+		newChar = charCode + number #the new, shifted, character
+		if charCode.between?(65,90) #for uppercase
 			if newChar > 90
-				newChar = parse_code(newChar)
+				newChar = parse_code(charCode, newChar)
 			end
 			newString += newChar.chr
-		elsif charIndex.between?(97,122) #for lowercase
+		elsif charCode.between?(97,122) #for lowercase
 			if newChar > 122
-				newChar = parse_code(newChar)
+				newChar = parse_code(charCode, newChar)
 			end
 			newString += newChar.chr
 		else 
-			newString += charIndex.chr
+			newString += charCode.chr
 		end
 		i += 1
 	end
 	p newString
 end
 
-caesar_cipher("$AwxyZ! Hi there doggie", 50)
+caesar_cipher("$ABcD", 53)
 

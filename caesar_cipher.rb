@@ -11,23 +11,29 @@ PseudoCode:
 	return the encoded string, leaving punctuation and format the same
 =end
 
+def parse_code(charCode) #help method to deal with numbers larger than 26 (double looping of alphabet)
+	until charCode.between?(65, 90) || charCode.between?(97,122)
+		charCode -= 26
+	end
+	return charCode
+end
+
 def caesar_cipher(string, number)
 	newString = ""
-	newChar = #stringCharacterCode + number
+	newChar = 0 #stringCharacterCode + number
 	stringArray = string.split("")
-	# for i in stringArray do
 	i = 0
 	while i < string.length
 		charIndex = stringArray[i].ord
 		newChar = charIndex + number
 		if charIndex.between?(65,90) #for uppercase
 			if newChar > 90
-				newChar -= 26
+				newChar = parse_code(newChar)
 			end
 			newString += newChar.chr
 		elsif charIndex.between?(97,122) #for lowercase
 			if newChar > 122
-				newChar -= 26
+				newChar = parse_code(newChar)
 			end
 			newString += newChar.chr
 		else 
@@ -38,5 +44,5 @@ def caesar_cipher(string, number)
 	p newString
 end
 
-caesar_cipher("$AwxyZ! Hi there doggie", 25)
+caesar_cipher("$AwxyZ! Hi there doggie", 50)
 

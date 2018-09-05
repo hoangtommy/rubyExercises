@@ -9,18 +9,18 @@
 
 def stock_picker(data) 
 	day1 = 0
-	while day1 < data.length - 1 # 2 < 8
+	while day1 < data.length - 1
 		day2 = day1 + 1	
-		while day2 < data.length # 3 < 9
-			profit ||= 0
-			if data[day2] - data[day1] > profit #10 - 3 > 12 #7 !> profit
-				profit = data[day2] - data[day1] # 12
-				sellDate = day2 #4
-				buyDate = day1 #1
+		while day2 < data.length
+			profit ||= 0 #initialize profit at 0
+			if data[day2] - data[day1] > profit
+				profit = data[day2] - data[day1]
+				sellDate = day2
+				buyDate = day1
 			end
-			day2 += 1 #day2 = 9
+			day2 += 1
 		end
-		day1 += 1 #2
+		day1 += 1
 	end
 	return [buyDate, sellDate] 
 end 

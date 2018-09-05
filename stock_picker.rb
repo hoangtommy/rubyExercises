@@ -2,8 +2,7 @@
 #  => [1,4]  # for a profit of $15 - $3 == $12
 
 #start by determining the first day to buy
-	#starting with the first, compare the profit margin (difference) between the first day and the following days
-		#continue to compare profits between the first day and the other days
+	#starting with the first day, compare the profit margin (difference) between the first day and the following days
 		#log each date pair and its profit margin. don't change it unless there's a pair date with a larger profit margin
 	#return the date pair
 
@@ -14,7 +13,7 @@ def stock_picker(data)
 		while day2 < data.length
 			profit ||= 0 #initialize profit at 0
 			if data[day2] - data[day1] > profit
-				profit = data[day2] - data[day1]
+				profit = data[day2] - data[day1] #update these variables if profit margin is larger than existing
 				sellDate = day2
 				buyDate = day1
 			end

@@ -24,30 +24,44 @@ def parse_code(charCode, newChar) #help method to deal with numbers larger than 
 	return newChar
 end
 
+# def caesar_cipher(string, number)
+# 	newString = ""
+# 	stringArray = string.split("")
+# 	i = 0
+# 	while i < string.length
+# 		charCode = stringArray[i].ord
+# 		newChar = charCode + number #the new, shifted, character
+# 		if charCode.between?(65,90) #for uppercase
+# 			if newChar > 90
+# 				newChar = parse_code(charCode, newChar)
+# 			end
+# 			newString += newChar.chr
+# 		elsif charCode.between?(97,122) #for lowercase
+# 			if newChar > 122
+# 				newChar = parse_code(charCode, newChar)
+# 			end
+# 			newString += newChar.chr
+# 		else 
+# 			newString += charCode.chr
+# 		end
+# 		i += 1
+# 	end
+# 	p newString
+# end
+
 def caesar_cipher(string, number)
-	newString = ""
-	stringArray = string.split("")
-	i = 0
-	while i < string.length
-		charCode = stringArray[i].ord
-		newChar = charCode + number #the new, shifted, character
-		if charCode.between?(65,90) #for uppercase
-			if newChar > 90
-				newChar = parse_code(charCode, newChar)
-			end
-			newString += newChar.chr
-		elsif charCode.between?(97,122) #for lowercase
-			if newChar > 122
-				newChar = parse_code(charCode, newChar)
-			end
-			newString += newChar.chr
-		else 
-			newString += charCode.chr
-		end
-		i += 1
-	end
-	p newString
+	return string.chars.map {|c|
+		(number%26).times{c.next!} if c.ord.between?(65, 90) || c.ord.between?(97, 122)
+		c[-1]
+	}.join("")
 end
 
-caesar_cipher("$ABcD", 53)
+puts "enter a message to encrypt"
+string = gets.chomp
+p string
+
+puts "enter an encryption number"
+number = gets
+
+p caesar_cipher(string, number.to_i)
 

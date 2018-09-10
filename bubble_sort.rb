@@ -5,10 +5,11 @@
 	#if the first element is larger, then swap the two elements' positions
 #do this over and over until the list is sorted from smallest to largest
 
-def bubble_sort(list) #[3,2,1] => [2,3,1] => [2,1,3] => [1,2,3]
-	until list[0] == list.min && list[-1] == list.max #3 != 1 && 1 == 3
+def bubble_sort(list)
+	last = list.size - 1
+	list.size.times do 
 		idx = 0
-		while idx < list.size - 1 #1 < 2
+		while idx < last #1 < 2
 			if list[idx] > list[idx + 1] #2 > 1
 				temp = list[idx] #temp = 2
 				list[idx] = list[idx + 1] #list[0] = 1
@@ -16,6 +17,7 @@ def bubble_sort(list) #[3,2,1] => [2,3,1] => [2,1,3] => [1,2,3]
 			end
 			idx += 1
 		end
+		last -= 1
 	end
 	p list
 end

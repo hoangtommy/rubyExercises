@@ -64,10 +64,10 @@ module Enumerable
 		total
 	end
 
-	def my_map
+	def my_map(proc=nil)
 		modified_array = []
 		self.my_each do |item|
-			modified_array << yield(item)
+			modified_array << (proc.nil? ? yield(item) : proc.call(item))
 		end
 		modified_array
 	end
@@ -87,5 +87,5 @@ end
 # response = gets.split(",") 
 arr = [2,4,5]
 arr2 = ["ted", "tasha", "tate"]
-
-# p arr.my_inject {|acc, item| acc * item}
+my_proc = Proc.new {|item| item*item}
+p arr.my_map my_proc

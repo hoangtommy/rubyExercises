@@ -21,27 +21,23 @@ module Enumerable
 
 	def my_select
 		modified_arr = []
-		self.each do |item|
+		self.my_each do |item|
 			modified_arr << item if yield(item)
 		end
 		modified_arr
 	end
 
 	def my_all?
-		modified_array = []
 		self.my_select do |item|
-			modified_array << item if yield(item)
+			return false if yield(item) == false
 		end
-		self.size == modified_array.size ? true : false
+		true
 	end
 
 	def my_any?
 		modified_array = []
 		self.my_select do |item|
-			modified_array << item if yield(item)
-			if modified_array.size > 0
-				return true
-			end
+			return true if yield(item) == true
 		end
 		false
 	end
@@ -53,5 +49,5 @@ end
 arr = [1,2,4,21]
 arr2 = ["ted", "tasha", "tate"]
 
-p arr.my_select {|item| item.odd?} #error: undefined methodd 'odd?' for nil
+p arr2.my_all? {|item| item[0] == "t"}
 

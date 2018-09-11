@@ -48,16 +48,18 @@ module Enumerable
 		true
 	end
 
-	def my_count
+	def my_count(element = nil)
 		total = 0
-		# if element != nil
-		# 	self.my_select do |item|
-		# 		total += 1 if yield(item) == element
-		# 	end
-		# 	return total
-		# end
-		self.my_select do |item|
-			total += 1 if yield(item) == true
+		if element != nil #do this if argument is passed
+			idx = 0
+			while idx < self.size
+				total +=1 if self[idx] == element
+				idx += 1
+			end
+		else
+			self.my_select do |item|
+				total += 1 if yield(item) == true
+			end
 		end
 		total
 	end
@@ -66,7 +68,7 @@ end
 
 # puts "type in a list of items, separated by a comma"
 # response = gets.split(",") 
-arr = [1,2,4,21,3,16]
+arr = [1,2,3,21,4,16]
 arr2 = ["ted", "tasha", "tate"]
 
-p arr.my_count(3) #{|item| item % 2 == 0}
+p arr.my_count {|item| item % 2 == 0}

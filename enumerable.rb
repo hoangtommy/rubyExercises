@@ -63,12 +63,29 @@ module Enumerable
 		end
 		total
 	end
+
+	def my_map
+		modified_array = []
+		self.my_each do |item|
+			modified_array << yield(item)
+		end
+		modified_array
+	end
+
+	def my_inject(accumulator=self[0])
+		total = accumulator
+		self.my_each do |item|
+			next if total == self[0] && item == self[0]
+			p total = yield(total, item)
+		end
+		total 
+	end
 end
 
 
 # puts "type in a list of items, separated by a comma"
 # response = gets.split(",") 
-arr = [1,2,3,21,4,16]
+arr = [2,4,5]
 arr2 = ["ted", "tasha", "tate"]
 
-p arr.my_count {|item| item % 2 == 0}
+# p arr.my_inject {|acc, item| acc * item}

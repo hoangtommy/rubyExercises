@@ -35,19 +35,38 @@ module Enumerable
 	end
 
 	def my_any?
-		modified_array = []
 		self.my_select do |item|
 			return true if yield(item) == true
 		end
 		false
+	end
+
+	def my_none?
+		self.my_select do |item|
+			return false if yield(item) == true
+		end
+		true
+	end
+
+	def my_count
+		total = 0
+		# if element != nil
+		# 	self.my_select do |item|
+		# 		total += 1 if yield(item) == element
+		# 	end
+		# 	return total
+		# end
+		self.my_select do |item|
+			total += 1 if yield(item) == true
+		end
+		total
 	end
 end
 
 
 # puts "type in a list of items, separated by a comma"
 # response = gets.split(",") 
-arr = [1,2,4,21]
+arr = [1,2,4,21,3,16]
 arr2 = ["ted", "tasha", "tate"]
 
-p arr2.my_all? {|item| item[0] == "t"}
-
+p arr.my_count(3) #{|item| item % 2 == 0}

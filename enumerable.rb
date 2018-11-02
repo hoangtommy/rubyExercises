@@ -88,4 +88,5 @@ end
 arr = [2,4,5]
 arr2 = ["ted", "tasha", "tate"]
 my_proc = Proc.new {|item| item*item}
-p arr.my_map my_proc
+# p arr.my_map my_proc
+p arr.inject(1) {|acc, n| acc + n}

@@ -56,12 +56,12 @@ def caesar_cipher(string, number)
 	}.join("")
 end
 
-puts "enter a message to encrypt"
-string = gets.chomp
-p string
+# puts "enter a message to encrypt"
+# string = gets.chomp
+# p string
 
-puts "enter an encryption number"
-number = gets
+# puts "enter an encryption number"
+# number = gets
 
-p caesar_cipher(string, number.to_i)
+# p caesar_cipher(string, number.to_i)
 
